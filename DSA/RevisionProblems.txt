@@ -1,0 +1,3 @@
+﻿
+//need to revise this below proble, todo
+arrayProblems.RemoveDuplicatesFromSortedArray(sortedArray).PrintArray();

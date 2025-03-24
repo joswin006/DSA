@@ -17,6 +17,13 @@ namespace DSA.Extensions
                 Console.Write(item + " ");
             }
         }
+        public static void PrintArray(this int[] arr)
+        {
+            foreach(var item in arr)
+            {
+                Console.Write(item + " ");
+            }
+        }
 
         public static void PrintInt(this int n) => Console.WriteLine(n);
 

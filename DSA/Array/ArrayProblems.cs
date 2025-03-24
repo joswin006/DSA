@@ -156,5 +156,107 @@ namespace DSA.Array
             }
             return a == 0 ? b : a;
         }
+
+        //it works but is it better?
+        //not right bcaz we are using 2 passes here like 2 time for loop
+        //so tc will be O(n) + O(n) can we simplify it? like can we do it in a single pass?
+        //yes
+
+        public int SecondLargestBrute(List<int> arr)
+        {
+            int slargest = 0;
+            int largest = 0;
+            for(int i=0;i<arr.Count;i++)
+            {
+                if (arr[i] > largest) largest = arr[i];
+            }
+            for(int i=0;i<arr.Count;i++)
+            {
+                if (arr[i] > slargest && arr[i] != largest)
+                {
+                    slargest = arr[i];
+                }
+            }
+            return slargest;
+        }
+        //in a single pass
+
+        public int secondLargest(List<int> arr)
+        {
+            int slargest = 0;
+            int largest = arr[0];
+            for (int i =0;i< arr.Count;i++)
+            {
+                if (arr[i] > largest)
+                {
+                    slargest = largest;
+                    largest = arr[i];
+                }
+                else if (arr[i]>slargest && arr[i]<largest)
+                {
+                    slargest = arr[i];
+                }
+            }
+            return slargest;
+        }
+
+
+        public bool CheckWhetherItIsASortedArray(List<int> arr)
+        {
+            for(int j= 1;j<arr.Count;j++)
+            {
+                if (arr[j - 1] < arr[j]) { }
+                else return false;
+            }
+            return true;
+        }
+
+        //easy brute we think of using a hashset or disctionary hashset removes duplictes automatically
+        //its ok to use this but space complexity? like it takes more right?O(n)
+        //is there a better way to do this?
+        //yes using a two pointer approach
+        public List<int> RemoveDuplicatesFromSortedArrayBrute(int[] arr)
+        {
+            var set = new HashSet<int>(arr).ToList();
+            return set;
+        }
+
+        //{ 1,1, 2, 3, 4, 4, 4, 5, 5, 6 }
+        //simple one pass
+        public List<int> RemoveDuplicatesFromSortedArray(int[] arr)
+        {
+            int i = 0;
+            for(int j=1;j<arr.Length;j++)
+            {
+                if (arr[i] != arr[j])
+                {
+                    arr[i + 1] = arr[j];
+                    i++;
+                }
+            }
+            return arr.ToList();
+        }
+
+        public int[] Rotate(int[] nums, int k)
+        {
+            for(int i=0;i<k;i++)
+            {
+                rotate(nums);
+            }
+            return nums;
+        }
+
+        public int[] rotate(int[] nums)
+        {
+            int last = nums[nums.Length - 1];
+            for (int i = nums.Length - 1; i > 0; i--)
+            {
+                nums[i] = nums[i - 1];
+            }
+            nums[0] = last;
+            return nums;
+        }
+
+
     }
 }
