@@ -1,3 +1,18 @@
 ﻿
 //need to revise this below proble, todo
-arrayProblems.RemoveDuplicatesFromSortedArray(sortedArray).PrintArray();
+
+arrayProblems.RemoveDuplicatesFromSortedArray(sortedArray).PrintArray();  //done
+
+        public List<int> RemoveDuplicatesFromSortedArray1(int[] arr)
+        {
+            int i = 0;
+            for(int j=1;j<arr.Length;j++)
+            {
+                if (arr[i] != arr[j])
+                {
+                    arr[i + 1] = arr[j];
+                    i++;
+                }
+            }
+            return arr.ToList();
+        }
