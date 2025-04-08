@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DSA.Array
+namespace DSA.ArrayProb
 {
     public class ArrayProblems
     {
@@ -166,11 +166,11 @@ namespace DSA.Array
         {
             int slargest = 0;
             int largest = 0;
-            for(int i=0;i<arr.Count;i++)
+            for (int i = 0; i < arr.Count; i++)
             {
                 if (arr[i] > largest) largest = arr[i];
             }
-            for(int i=0;i<arr.Count;i++)
+            for (int i = 0; i < arr.Count; i++)
             {
                 if (arr[i] > slargest && arr[i] != largest)
                 {
@@ -185,14 +185,14 @@ namespace DSA.Array
         {
             int slargest = 0;
             int largest = arr[0];
-            for (int i =0;i< arr.Count;i++)
+            for (int i = 0; i < arr.Count; i++)
             {
                 if (arr[i] > largest)
                 {
                     slargest = largest;
                     largest = arr[i];
                 }
-                else if (arr[i]>slargest && arr[i]<largest)
+                else if (arr[i] > slargest && arr[i] < largest)
                 {
                     slargest = arr[i];
                 }
@@ -203,7 +203,7 @@ namespace DSA.Array
 
         public bool CheckWhetherItIsASortedArray(List<int> arr)
         {
-            for(int j= 1;j<arr.Count;j++)
+            for (int j = 1; j < arr.Count; j++)
             {
                 if (arr[j - 1] < arr[j]) { }
                 else return false;
@@ -226,7 +226,7 @@ namespace DSA.Array
         public List<int> RemoveDuplicatesFromSortedArray(int[] arr)
         {
             int i = 0;
-            for(int j=1;j<arr.Length;j++)
+            for (int j = 1; j < arr.Length; j++)
             {
                 if (arr[i] != arr[j])
                 {
@@ -239,7 +239,7 @@ namespace DSA.Array
 
         public int[] Rotate(int[] nums, int k)
         {
-            for(int i=0;i<k;i++)
+            for (int i = 0; i < k; i++)
             {
                 rotate(nums);
             }
@@ -257,7 +257,70 @@ namespace DSA.Array
             return nums;
         }
 
+        public int[] RotateKTimes(int[] nums, int k)
+        {
+            int numberOfTimesToRotate = k % nums.Length;//how it works? 7 times rotate anums.Length = 7 | ie so 7 % 7 = 0 rotation
+                                                        //no need to do it for 7 times
+                                                        //3 times rotate nums.Length = 15 20 % 5 = 5
 
+            Array.Reverse(nums);
+            Array.Reverse(nums, 0, k);
+            Array.Reverse(nums, k, nums.Length - k);
+            return nums;
+        }
 
+        //optimal 2 pointers at 2 different array
+        // how brute works here just put it inside a set it will work 
+        //reason set remobes duplicates and this approch gives us a extra space
+        public List<int> UnionArray(int[] firstArray, int[] sccondArray)
+        {
+            List<int> unnionArr = new List<int>();
+            int n1 = firstArray.Length - 1;
+            int n2 = firstArray.Length - 1;
+            int i = 0;
+            int j = 0;
+            while (i <= n1 && j <= n2)
+            {
+                if (firstArray[i] <= sccondArray[j])
+                {
+                    if (unnionArr.Last() != firstArray[i]
+                    || unnionArr.Count == 0)
+                    {
+                        unnionArr.Add(firstArray[i]);
+                    }
+                    i++;
+                }
+                else
+                {
+                    if (unnionArr.Last() != sccondArray[j]
+                    || unnionArr.Count == 0)
+                    {
+                        unnionArr.Add(sccondArray[j]);
+                    }
+                    j++;
+                }
+
+            }
+            while (i <= n1)
+            {
+
+                if (unnionArr.Last() != firstArray[i]
+                || unnionArr.Count == 0)
+                {
+                    unnionArr.Add(firstArray[i]);
+                }
+                i++;
+            }
+            while (j <= n2)
+            {
+                if (unnionArr.Last() != sccondArray[j]
+                   || unnionArr.Count == 0)
+                {
+                    unnionArr.Add(sccondArray[j]);
+                }
+                j++;
+            }
+            return unnionArr;
+        }
     }
 }

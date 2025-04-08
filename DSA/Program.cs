@@ -1,4 +1,4 @@
-﻿using DSA.Array;
+﻿using DSA.ArrayProb;
 using DSA.BasicRecursion;
 using DSA.Extensions;
 using System.Runtime.InteropServices;
@@ -30,7 +30,7 @@ ArrayProblems arrayProblems = new ArrayProblems(array, number);
 //arrayProblems.RemoveDuplicatesFromSortedArrayBrute(sortedArray).PrintArray();
 //arrayProblems.RemoveDuplicatesFromSortedArray(sortedArray).PrintArray();
 //arrayProblems.rotate(sortedArray).PrintArray();
-arrayProblems.Rotate(sortedArray,3).PrintArray();
+arrayProblems.RotateKTimes(sortedArray,3).PrintArray();
 
 
 
