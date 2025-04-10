@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -322,5 +323,62 @@ namespace DSA.ArrayProb
             }
             return unnionArr;
         }
+
+        //find missing num from 0 t0 n
+        //takes O(n2) at worst case since it runs two loops
+        //is there any better ap[proch ? yes
+        public int MissingNumberBrute(int[] arr)
+        {
+            var missing = -1;
+            for(int i=0;i<arr.Length;i++)
+            {
+                int flag = 0;
+                for(int j=0;j<arr.Length;j++)
+                {
+                    if(i == arr[j])
+                    {
+                        flag = 1;
+                        break;
+                    }
+                }
+                if (flag == 0) missing = i;
+            }
+            return missing;
+        }
+
+        //time complexity is O(n) + O(n) its ok but space it takes a extra space hoe to resolve it?
+        //is there any better way yes
+        public int MissingNumbersBetter(int[] arr)
+        {
+            int[] Hasharr = new int[arr.Length + 1];
+            var missing = -1;
+            for(int i = 0;i<arr.Length;i++)
+            {
+                Hasharr[arr[i]] = 1;
+            }
+            for (int i = 0; i < arr.Length; i++)
+            {
+                if (arr[i] != 1) missing = i + 1;
+            }
+
+            return missing;
+
+        }
+        //there are two optimals one is using sum of n natural nums n*m(n+1)/2 and using xor symbol ^
+        // 2 ^ 2 =0 and 2 ^ 0 = 2
+
+        public int MissingNumberOptimal1(int[]arr)
+        {
+            var missing = -1;
+            var expectedsum = arr.Length * (arr.Length + 1) / 2;
+            var actualsum = 0;
+            foreach(var item in arr)
+            {
+                actualsum += item;
+            }
+            return missing = expectedsum - actualsum;
+        }
+
+
     }
 }
